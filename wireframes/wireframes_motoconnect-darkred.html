@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MotoConnect — Wireframes v5 · Asphalt & Carbon</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --asp:#141414;--carb:#1E1E1E;--carb2:#262626;--carb3:#2E2E2E;
+  --b1:rgba(255,255,255,0.05);--b2:rgba(255,255,255,0.1);--b3:rgba(255,255,255,0.16);
+  --t1:#F5F3F0;--t2:#888580;--t3:#484542;
+  --red:#D93025;--red2:#B02319;--reds:rgba(217,48,37,0.15);--redss:rgba(217,48,37,0.08);
+  --grn:#4CAF72;--grns:rgba(76,175,114,0.15);
+  --pw:200px;
+}
+body{font-family:'DM Sans',sans-serif;background:#0D0D0D;color:var(--t1);padding:48px 32px;min-height:100vh}
+header{display:flex;align-items:baseline;gap:16px;margin-bottom:48px;padding-bottom:20px;border-bottom:1px solid var(--b2)}
+h1{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--t1);letter-spacing:-.3px}
+.version{font-family:'DM Mono',monospace;font-size:11px;color:var(--t3);background:var(--carb);padding:2px 8px;border-radius:4px;border:1px solid var(--b2)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px;max-width:1100px}
+.col{display:flex;flex-direction:column;align-items:center;gap:16px}
+.etag{font-family:'DM Mono',monospace;font-size:10px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;align-self:flex-start}
+.phone{width:var(--pw);background:var(--asp);border:1px solid var(--b3);border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,0.03),0 20px 60px rgba(0,0,0,0.8)}
+.sb{background:var(--asp);padding:10px 14px 5px;display:flex;justify-content:space-between;align-items:center}
+.st{font-family:'DM Mono',monospace;font-size:10px;color:var(--t2)}
+.si{display:flex;gap:3px;align-items:center}
+.sd{width:13px;height:6px;background:var(--t3);border-radius:1px}
+.sd.on{background:var(--t2)}
+.topbar{padding:8px 12px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1)}
+.topbar-back{padding:8px 12px 10px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--b1)}
+.tt{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--t1)}
+.ts{font-size:10px;color:var(--t3)}
+.ti{font-size:15px;color:var(--t3)}
+.bk{font-size:16px;color:var(--t3);line-height:1}
+.nav{display:flex;justify-content:space-around;padding:8px 0 10px;border-top:1px solid var(--b1);background:var(--carb)}
+.ni{display:flex;flex-direction:column;align-items:center;gap:2px}
+.ni i{font-size:18px;color:var(--t3)}
+.ni.a i{color:var(--red)}
+.ni span{font-size:8px;color:var(--t3)}
+.ni.a span{color:var(--red)}
+.ni-pip{width:4px;height:4px;border-radius:50%;background:var(--red);margin:0 auto;margin-top:1px}
+.filters{display:flex;gap:5px;padding:8px 12px 4px;overflow:hidden}
+.f{font-size:9px;padding:3px 9px;border-radius:12px;border:1px solid var(--b2);color:var(--t3);white-space:nowrap}
+.f.a{background:var(--reds);color:var(--red);border-color:rgba(217,48,37,.4)}
+.feed{padding:2px 12px 6px}
+.dsep{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;padding:8px 0 4px;border-bottom:1px solid var(--b1);margin-bottom:4px}
+.sig{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--b1)}
+.sig:last-child{border-bottom:none}
+.sig-badge{font-size:8px;font-weight:500;padding:2px 6px;border-radius:3px;flex-shrink:0;white-space:nowrap;letter-spacing:.5px}
+.blv{background:var(--reds);color:var(--red);border:1px solid rgba(217,48,37,.3)}
+.bst{background:var(--redss);color:rgba(217,48,37,.7);border:1px solid rgba(217,48,37,.2)}
+.bpl{background:var(--b1);color:var(--t3);border:1px solid var(--b2)}
+.sig-icon{width:28px;height:28px;border-radius:6px;background:var(--carb2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sig-icon i{font-size:14px;color:var(--t2)}
+.sig-icon.hot{background:var(--reds);border-color:rgba(217,48,37,.3)}
+.sig-icon.hot i{color:var(--red)}
+.sig-body{flex:1;min-width:0}
+.sig-title{font-size:11px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sig-meta{font-size:10px;color:var(--t3);margin-top:1px}
+.sig-arr{font-size:14px;color:var(--t3)}
+.fab-z{padding:8px 12px 4px}
+.fab{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--red);color:#fff;border-radius:8px;padding:9px 16px;font-family:'Syne',sans-serif;font-size:10px;font-weight:500;width:100%;border:none;cursor:pointer}
+.fab i{font-size:13px}
+.hero{background:var(--carb);padding:12px;border-bottom:1px solid var(--b1)}
+.hero-top{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.org-av{width:22px;height:22px;border-radius:6px;background:var(--carb3);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:500;color:var(--t2);flex-shrink:0}
+.org-name{font-size:10px;color:var(--t2)}
+.org-sep{color:var(--t3);font-size:10px}
+.hero-pills{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.hp{font-size:8px;padding:2px 6px;border-radius:3px;background:var(--b1);color:var(--t2);border:1px solid var(--b2)}
+.hp.r{background:var(--reds);color:var(--red);border-color:rgba(217,48,37,.3)}
+.hero-rows{display:flex;flex-direction:column;gap:4px}
+.hr{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--t2)}
+.hr i{font-size:12px;color:var(--t3);flex-shrink:0}
+.hr strong{color:var(--t1)}
+.mapz{background:var(--carb);height:66px;position:relative;overflow:hidden;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
+.gl{position:absolute;background:var(--b1)}
+.gl-h{left:0;right:0;height:1px}
+.gl-v{top:0;bottom:0;width:1px}
+.rd-line{position:absolute;background:rgba(255,255,255,0.07)}
+.rd-h{left:0;right:0;height:2px}
+.rd-v{top:0;bottom:0;width:2px}
+.mpin{position:absolute;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--asp)}
+.mlbl{position:absolute;font-size:7px;color:var(--t3)}
+.itin{padding:8px 12px;border-bottom:1px solid var(--b1)}
+.itin-lbl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.inode-d{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.inode-l{width:1px;height:9px;background:var(--b2)}
+.itext{font-size:10px;color:var(--t2);padding:2px 0}
+.itext.s{color:var(--t1);font-weight:500}
+.spots{padding:8px 12px;border-bottom:1px solid var(--b1)}
+.spots-lbl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.av-row{display:flex;align-items:center;gap:0}
+.sav{width:22px;height:22px;border-radius:6px;background:var(--carb2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:500;color:var(--t2);margin-right:3px}
+.sav-e{width:22px;height:22px;border-radius:6px;border:1px dashed var(--b2);margin-right:3px}
+.spots-ct{font-size:10px;color:var(--t3);margin-left:8px}
+.ctas{padding:10px 12px 6px;display:flex;gap:6px}
+.cta-p{flex:1;padding:8px 0;border-radius:7px;background:var(--red);color:#fff;font-size:10px;font-weight:500;text-align:center;font-family:'Syne',sans-serif}
+.cta-s{flex:0 0 auto;padding:8px 12px;border-radius:7px;background:var(--carb2);color:var(--t2);font-size:10px;text-align:center;border:1px solid var(--b2);display:flex;align-items:center;gap:4px}
+.cta-s i{font-size:13px}
+.ext{padding:0 12px 10px;display:flex;gap:5px}
+.ext-b{flex:1;padding:5px 0;border-radius:6px;border:1px solid var(--b2);font-size:9px;color:var(--t3);text-align:center;display:flex;align-items:center;justify-content:center;gap:3px}
+.ext-b i{font-size:11px}
+.chat-area{padding:8px 12px;display:flex;flex-direction:column;gap:7px}
+.cmsg{max-width:84%}
+.cmsg-l{align-self:flex-start}
+.cmsg-r{align-self:flex-end}
+.cmsg-n{font-size:8px;color:var(--t3);margin-bottom:2px}
+.bbl{padding:7px 9px;border-radius:10px;font-size:10px;line-height:1.45;color:var(--t1)}
+.bbl-l{background:var(--carb2);border:1px solid var(--b2);border-bottom-left-radius:3px}
+.bbl-r{background:var(--red);border-bottom-right-radius:3px}
+.sys{align-self:center;font-size:9px;color:var(--t3);background:var(--b1);padding:3px 9px;border-radius:10px}
+.chat-bar{margin:0 12px 10px;background:var(--carb2);border:1px solid var(--b2);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:6px}
+.chat-ph{font-size:10px;color:var(--t3);flex:1}
+.chat-s{font-size:15px;color:var(--red)}
+.req-hdr{padding:10px 12px;background:var(--carb);border-bottom:1px solid var(--b1)}
+.rh-t{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--t1);margin-bottom:1px}
+.rh-s{font-size:10px;color:var(--t3)}
+.reqs{padding:0 12px 6px}
+.req{display:flex;align-items:center;gap:7px;padding:8px 0;border-bottom:1px solid var(--b1)}
+.req-av{width:30px;height:30px;border-radius:8px;background:var(--carb2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--t2);flex-shrink:0}
+.req-b{flex:1;min-width:0}
+.req-n{font-size:11px;font-weight:500;color:var(--t1)}
+.req-m{font-size:9px;color:var(--t3)}
+.req-btns{display:flex;gap:5px}
+.rb{width:27px;height:27px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+.rb-y{background:var(--grns)}
+.rb-y i{font-size:13px;color:var(--grn)}
+.rb-n{background:var(--reds)}
+.rb-n i{font-size:13px;color:var(--red)}
+.members{padding:0 12px 10px}
+.m-sep{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;padding:8px 0 5px;border-bottom:1px solid var(--b1);margin-bottom:4px}
+.m-row{display:flex;align-items:center;gap:7px;padding:5px 0}
+.m-av{width:24px;height:24px;border-radius:7px;background:var(--carb2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;color:var(--t2);flex-shrink:0}
+.m-name{font-size:10px;color:var(--t1);flex:1}
+.m-role{font-size:9px;color:var(--t3)}
+.m-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.annots{width:220px;align-self:flex-start;display:flex;flex-direction:column;gap:6px}
+.ann{display:flex;align-items:flex-start;gap:6px}
+.ann-d{width:10px;height:1px;background:var(--b3);flex-shrink:0;margin-top:7px}
+.ann-t{font-size:11px;color:var(--t3);line-height:1.5}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--b2);font-family:'DM Mono',monospace;font-size:10px;color:var(--t3);display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header>
+  <h1>MotoConnect</h1>
+  <span class="version">Wireframes v5 · Asphalt & Carbon · 2025/2026</span>
+</header>
+
+<div class="grid">
+
+  <!-- 01 FIL -->
+  <div class="col">
+    <span class="etag">01 — Fil des signaux</span>
+    <div class="phone">
+      <div class="sb"><span class="st">9:41</span><div class="si"><div class="sd on"></div><div class="sd on"></div><div class="sd"></div></div></div>
+      <div class="topbar">
+        <div><div class="tt">Autour de toi</div><div class="ts">Montpellier · 34 riders</div></div>
+        <div style="display:flex;gap:10px"><i class="ti ti-search ti"></i><i class="ti ti-adjustments-horizontal ti"></i></div>
+      </div>
+      <div class="filters">
+        <div class="f a">Tous</div><div class="f">Maintenant</div><div class="f">Aujourd'hui</div><div class="f">Planifié</div>
+      </div>
+      <div class="feed">
+        <div class="dsep">Maintenant</div>
+        <div class="sig">
+          <span class="sig-badge blv">LIVE</span>
+          <div class="sig-icon hot"><i class="ti ti-motorbike"></i></div>
+          <div class="sig-body"><div class="sig-title">Thomas · Odysseum</div><div class="sig-meta">0.8 km · Z900 · Sportif</div></div>
+          <i class="ti ti-chevron-right sig-arr"></i>
+        </div>
+        <div class="dsep">Cet après-midi</div>
+        <div class="sig">
+          <span class="sig-badge bst">14H</span>
+          <div class="sig-icon"><i class="ti ti-route"></i></div>
+          <div class="sig-body"><div class="sig-title">Cols du Ventoux</div><div class="sig-meta">3/6 · Sportif · Montpellier</div></div>
+          <i class="ti ti-chevron-right sig-arr"></i>
+        </div>
+        <div class="sig">
+          <span class="sig-badge bst">18H</span>
+          <div class="sig-icon"><i class="ti ti-route"></i></div>
+          <div class="sig-body"><div class="sig-title">Balade côtière</div><div class="sig-meta">1/4 · Peinard · Sète</div></div>
+          <i class="ti ti-chevron-right sig-arr"></i>
+        </div>
+        <div class="dsep">Vendredi 17 mai</div>
+        <div class="sig">
+          <span class="sig-badge bpl">VEN 17</span>
+          <div class="sig-icon"><i class="ti ti-route"></i></div>
+          <div class="sig-body"><div class="sig-title">Gorges du Tarn</div><div class="sig-meta">1/8 · Peinard · Millau</div></div>
+          <i class="ti ti-chevron-right sig-arr"></i>
+        </div>
+      </div>
+      <div class="fab-z"><button class="fab"><i class="ti ti-plus"></i>Publier un signal</button></div>
+      <div style="height:6px"></div>
+      <div class="nav">
+        <div class="ni a"><i class="ti ti-layout-list"></i><span>Fil</span></div>
+        <div class="ni"><i class="ti ti-map-2"></i><span>Carte</span></div>
+        <div class="ni"><i class="ti ti-calendar"></i><span>Balades</span><div class="ni-pip"></div></div>
+        <div class="ni"><i class="ti ti-user-circle"></i><span>Profil</span></div>
+      </div>
+    </div>
+    <div class="annots">
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Fond asphalt #141414 — quasi-noir chaud</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Rouge vif sur LIVE — urgence immédiate</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">CTA pleine largeur rouge = action principale</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Icône moto en rouge = rider disponible maintenant</div></div>
+    </div>
+  </div>
+
+  <!-- 02 DÉTAIL -->
+  <div class="col">
+    <span class="etag">02 — Détail balade</span>
+    <div class="phone">
+      <div class="sb"><span class="st">9:41</span><div class="si"><div class="sd on"></div><div class="sd on"></div><div class="sd"></div></div></div>
+      <div class="topbar-back">
+        <span class="bk">←</span>
+        <div style="flex:1"><div class="tt">Cols du Ventoux</div><div class="ts">Vendredi 17 mai · 14h00</div></div>
+        <i class="ti ti-share ti"></i>
+      </div>
+      <div class="hero">
+        <div class="hero-top"><div class="org-av">TM</div><span class="org-name">Thomas M.</span><span class="org-sep">·</span><span class="org-name">Z900 2022</span></div>
+        <div class="hero-pills"><span class="hp r">Sportif</span><span class="hp">Col</span><span class="hp">Intermédiaire</span><span class="hp r">Manuel</span></div>
+        <div class="hero-rows">
+          <div class="hr"><i class="ti ti-map-pin"></i><span>Départ : <strong>Parking Géant Casino</strong></span></div>
+          <div class="hr"><i class="ti ti-users"></i><span><strong>3 / 6 places</strong> · 2 en attente</span></div>
+          <div class="hr"><i class="ti ti-clock"></i><span>Départ dans <strong>2 jours</strong></span></div>
+        </div>
+      </div>
+      <div class="mapz">
+        <div class="gl gl-h" style="top:33%"></div><div class="gl gl-h" style="top:66%"></div>
+        <div class="gl gl-v" style="left:25%"></div><div class="gl gl-v" style="left:50%"></div><div class="gl gl-v" style="left:75%"></div>
+        <div class="rd-line rd-h" style="top:55%"></div><div class="rd-line rd-v" style="left:36%"></div>
+        <div class="mpin" style="background:#D93025;top:55%;left:36%;"></div>
+        <div class="mpin" style="background:#888580;top:32%;left:60%;"></div>
+        <div class="mpin" style="background:#484542;top:18%;left:78%;"></div>
+        <div class="mlbl" style="top:57%;left:38%">Départ</div>
+        <div class="mlbl" style="top:34%;left:62%">Col</div>
+        <div class="mlbl" style="top:10%;left:68%">Sommet</div>
+      </div>
+      <div class="itin">
+        <div class="itin-lbl">Itinéraire · 3 étapes</div>
+        <div style="display:flex;gap:8px;align-items:stretch">
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+            <div class="inode-d" style="background:#D93025"></div>
+            <div class="inode-l"></div>
+            <div class="inode-d" style="background:#888580"></div>
+            <div class="inode-l"></div>
+            <div class="inode-d" style="background:#484542"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;flex:1">
+            <div class="itext s">Parking Géant Casino</div>
+            <div class="itext">Col de la Lusette</div>
+            <div class="itext">Mont Ventoux — sommet</div>
+          </div>
+        </div>
+      </div>
+      <div class="spots">
+        <div class="spots-lbl">Riders · 3/6</div>
+        <div style="display:flex;align-items:center">
+          <div class="av-row"><div class="sav">TM</div><div class="sav">JM</div><div class="sav">PL</div><div class="sav-e"></div><div class="sav-e"></div><div class="sav-e"></div></div>
+          <span class="spots-ct">3 libres</span>
+        </div>
+      </div>
+      <div class="ctas">
+        <div class="cta-p">Demander à rejoindre</div>
+        <div class="cta-s"><i class="ti ti-message-circle"></i>Fil</div>
+      </div>
+      <div class="ext">
+        <div class="ext-b"><i class="ti ti-map"></i>Waze</div>
+        <div class="ext-b"><i class="ti ti-brand-google-maps"></i>Maps</div>
+        <div class="ext-b"><i class="ti ti-map-pin"></i>Apple</div>
+      </div>
+      <div class="nav">
+        <div class="ni"><i class="ti ti-layout-list"></i><span>Fil</span></div>
+        <div class="ni"><i class="ti ti-map-2"></i><span>Carte</span></div>
+        <div class="ni a"><i class="ti ti-calendar"></i><span>Balades</span></div>
+        <div class="ni"><i class="ti ti-user-circle"></i><span>Profil</span></div>
+      </div>
+    </div>
+    <div class="annots">
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Surface carbone #1E1E1E pour le hero</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Pin départ rouge, étapes en gris dégradé</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Slots vides en pointillés — places visibles</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">3 apps de navigation en bas de l'écran</div></div>
+    </div>
+  </div>
+
+  <!-- 03 CHAT -->
+  <div class="col">
+    <span class="etag">03 — Fil de discussion</span>
+    <div class="phone">
+      <div class="sb"><span class="st">9:41</span><div class="si"><div class="sd on"></div><div class="sd on"></div><div class="sd"></div></div></div>
+      <div class="topbar-back">
+        <span class="bk">←</span>
+        <div style="flex:1"><div class="tt">Cols du Ventoux</div><div class="ts">3 riders · Vend. 14h00</div></div>
+        <i class="ti ti-info-circle ti"></i>
+      </div>
+      <div class="chat-area">
+        <div class="sys">Thomas a créé la balade</div>
+        <div class="cmsg cmsg-l"><div class="cmsg-n">Thomas (organisateur)</div><div class="bbl bbl-l">RDV parking Géant Casino côté motos, j'arrive à 13h50</div></div>
+        <div class="cmsg cmsg-l"><div class="cmsg-n">Julien</div><div class="bbl bbl-l">Quel rythme prévu ? Je suis sur une 650</div></div>
+        <div class="cmsg cmsg-r"><div class="bbl bbl-r">Tranquille, on s'adapte. Route des crêtes puis Ventoux</div></div>
+        <div class="sys">Pierre a rejoint la balade</div>
+        <div class="cmsg cmsg-l"><div class="cmsg-n">Pierre</div><div class="bbl bbl-l">5 min de retard, vous pouvez m'attendre ?</div></div>
+        <div class="cmsg cmsg-r"><div class="bbl bbl-r">No problem, on attend !</div></div>
+      </div>
+      <div class="chat-bar"><div class="chat-ph">Message...</div><i class="ti ti-send chat-s"></i></div>
+      <div class="nav">
+        <div class="ni"><i class="ti ti-layout-list"></i><span>Fil</span></div>
+        <div class="ni"><i class="ti ti-map-2"></i><span>Carte</span></div>
+        <div class="ni a"><i class="ti ti-calendar"></i><span>Balades</span></div>
+        <div class="ni"><i class="ti ti-user-circle"></i><span>Profil</span></div>
+      </div>
+    </div>
+    <div class="annots">
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Bulles rouges = mes messages, signature sport</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Surface carbone pour les bulles reçues</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Pills système centrées et discrètes</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Scénario "5 min de retard" bien illustré</div></div>
+    </div>
+  </div>
+
+  <!-- 04 ORGANISATEUR -->
+  <div class="col">
+    <span class="etag">04 — Gestion des demandes</span>
+    <div class="phone">
+      <div class="sb"><span class="st">9:41</span><div class="si"><div class="sd on"></div><div class="sd on"></div><div class="sd"></div></div></div>
+      <div class="topbar-back">
+        <span class="bk">←</span>
+        <div style="flex:1"><div class="tt">Cols du Ventoux</div><div class="ts">Vue organisateur</div></div>
+        <i class="ti ti-settings ti"></i>
+      </div>
+      <div class="req-hdr"><div class="rh-t">2 demandes en attente</div><div class="rh-s">3 / 6 places confirmées</div></div>
+      <div class="reqs">
+        <div class="req">
+          <div class="req-av">SR</div>
+          <div class="req-b"><div class="req-n">Sofia R.</div><div class="req-m">CB650R · Col, Sportif · 12 balades</div></div>
+          <div class="req-btns"><div class="rb rb-y"><i class="ti ti-check"></i></div><div class="rb rb-n"><i class="ti ti-x"></i></div></div>
+        </div>
+        <div class="req">
+          <div class="req-av">ML</div>
+          <div class="req-b"><div class="req-n">Marc L.</div><div class="req-m">Monster 821 · Sportif · 3 balades</div></div>
+          <div class="req-btns"><div class="rb rb-y"><i class="ti ti-check"></i></div><div class="rb rb-n"><i class="ti ti-x"></i></div></div>
+        </div>
+      </div>
+      <div class="members">
+        <div class="m-sep">Confirmés · 3/6</div>
+        <div class="m-row"><div class="m-dot" style="background:#D93025"></div><div class="m-av">TM</div><div class="m-name">Thomas M.</div><div class="m-role">organisateur</div></div>
+        <div class="m-row"><div class="m-dot" style="background:#4CAF72"></div><div class="m-av">JM</div><div class="m-name">Julien M.</div><div class="m-role">confirmé</div></div>
+        <div class="m-row"><div class="m-dot" style="background:#4CAF72"></div><div class="m-av">PL</div><div class="m-name">Pierre L.</div><div class="m-role">confirmé</div></div>
+        <div class="m-sep">Liste d'attente · 2</div>
+        <div class="m-row"><div class="m-dot" style="background:#484542"></div><div class="m-av">AK</div><div class="m-name">Ana K.</div><div class="m-role">attente #1</div></div>
+        <div class="m-row"><div class="m-dot" style="background:#484542"></div><div class="m-av">RD</div><div class="m-name">Romain D.</div><div class="m-role">attente #2</div></div>
+      </div>
+      <div class="nav">
+        <div class="ni"><i class="ti ti-layout-list"></i><span>Fil</span></div>
+        <div class="ni"><i class="ti ti-map-2"></i><span>Carte</span></div>
+        <div class="ni a"><i class="ti ti-calendar"></i><span>Balades</span></div>
+        <div class="ni"><i class="ti ti-user-circle"></i><span>Profil</span></div>
+      </div>
+    </div>
+    <div class="annots">
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Avatars carrés arrondis — style moto/tech</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Rouge organisateur, vert confirmé, gris attente</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Profil rider visible avant décision</div></div>
+      <div class="ann"><div class="ann-d"></div><div class="ann-t">Ordre d'attente numéroté et lisible</div></div>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <span>MotoConnect — Wireframes v5 · Asphalt &amp; Carbon</span>
+  <span>Licence CDA 2025/2026</span>
+</footer>
+</body>
+</html>
