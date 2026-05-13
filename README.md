@@ -1,21 +1,21 @@
 # 🏍️ MotoConnect
 
-> **Trouve · Roule · Connecte** — L'app qui connecte les motards en temps réel.
+> **Trouve · Roule · Connecte** — L'app qui connecte les motards autour d'une passion commune.
 
 ---
 
 ## 📋 Présentation du projet
 
-MotoConnect est une application web et mobile qui permet aux motards de se localiser mutuellement en temps réel sur une carte interactive, d'organiser des balades groupées et d'échanger au sein d'une communauté de riders.
+MotoConnect est une application web et mobile qui permet aux motards de trouver des compagnons de route au bon moment — maintenant, dans quelques heures, ou dans quelques jours — en publiant une sortie visible par les riders proches.
 
-Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2024–2025.
+Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2025/2026.
 
 ---
 
 ## 🎯 Problème identifié
 
-- Impossible de savoir si d'autres motards roulent près de toi en ce moment
-- Organiser une balade de groupe = des dizaines de messages WhatsApp
+- Les motards veulent rouler ensemble mais n'ont aucun moyen simple de trouver des compagnons de route
+- Organiser une balade = des dizaines de messages WhatsApp et aucune gestion des inscriptions
 - Aucune application dédiée à la communauté moto en France
 
 ---
@@ -24,10 +24,10 @@ Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2024–
 
 | Profil | Description |
 |---|---|
-| Rider du weekend | Balades tranquilles, découverte de routes |
-| Sportif | Cols, performance, routes sinueuses |
-| Tourer | Longs trajets, road trips |
-| Urbain | Mobilité quotidienne, scooter/moto |
+| Le rider spontané | Sort quand l'envie lui prend, cherche de la compagnie au dernier moment |
+| L'organisateur | Prépare ses sorties à l'avance, veut gérer un groupe structuré |
+| Le découvreur | Nouveau dans une région, cherche des locaux qui connaissent les bonnes routes |
+| L'observateur | Consulte l'app passivement, veut être notifié sans s'exposer |
 
 **Marché** : 4 millions de motards en France.
 
@@ -35,15 +35,24 @@ Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2024–
 
 ## ✨ Fonctionnalités
 
-### Fonctionnalité principale
-- **Carte temps réel** — Voir les riders connectés autour de soi via géolocalisation live (WebSocket / Socket.io), avec filtres par style de ride (Sportif, Touring, Peinard, Col)
+### Fonctionnalité principale — Le fil des sorties
+
+Un fil de sorties organisé en trois horizons temporels :
+
+| Horizon | Exemple | Durée de vie |
+|---|---|---|
+| **Maintenant** | "Je suis au parking Odysseum, quelqu'un veut rider ?" | Expire en 2h |
+| **Aujourd'hui** | "Je pars cet aprem vers 14h direction les Cévennes" | Expire le soir |
+| **Planifié** | "Balade Ventoux vendredi 14h — 6 places" | Jusqu'à la date |
 
 ### Fonctionnalités secondaires
-- Création et participation à des balades (date, heure, point de départ, nombre de places)
-- Chat de groupe lié à chaque balade
-- Profil rider (moto, style de ride, historique des balades)
-- Fil d'actualité communautaire (posts, photos)
-- Mode invisible (ne pas apparaître sur la carte)
+
+- **Inscriptions structurées** — mode automatique ou manuel (à la BlaBlaCar), liste d'attente ordonnée
+- **Chat par sortie** — fil de discussion activé dès confirmation, messages système automatiques
+- **Itinéraire avec étapes** — point de RDV + waypoints optionnels, export vers Waze / Google Maps / Apple Maps en 1 tap
+- **Profil rider** — moto, style de ride, historique des sorties, stats
+- **Carte contextuelle** — sorties immédiates sur la map, mode invisible
+- **Notifications push** — rappel la veille, nouvelle sortie dans le rayon, place libérée
 
 ---
 
@@ -62,21 +71,21 @@ Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2024–
 | Technologie | Usage |
 |---|---|
 | Node.js + Express | API REST |
-| Socket.io | Géolocalisation et chat en temps réel |
+| Socket.io | Temps réel (sorties live, chat) |
 | JWT + Refresh Token | Authentification |
 | bcrypt | Hashage des mots de passe |
+| Cloudinary | Stockage des photos (public_id en BDD) |
 
 ### Base de données
 | Technologie | Usage |
 |---|---|
 | PostgreSQL | Base de données principale |
-| Prisma | ORM — interface entre Node.js et PostgreSQL (migrations, requêtes, typage) |
-| Cloudinary | Stockage des photos (public_id en BDD, transformations via URL) |
+| Prisma | ORM — migrations, requêtes typées, schéma |
 
 ### Déploiement
- 
+
 **Stratégie progressive :**
- 
+
 | Phase | Service | Usage | Coût |
 |---|---|---|---|
 | Développement | Neon | PostgreSQL serverless | Gratuit |
@@ -85,42 +94,61 @@ Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2024–
 | Staging | Railway | Backend + PostgreSQL groupés | ~5$/mois |
 | Production | Kubernetes + Docker | Orchestration complète | Variable |
 | Mobile | Expo EAS | Build iOS + Android | Gratuit (limité) |
- 
-> **Objectif** : déploiement Kubernetes en fin de projet si le temps le permet — ingress, services et deployments séparés pour le backend Node.js, Socket.io et PostgreSQL.
+
+> **Objectif** : déploiement Kubernetes en fin d'année si le temps le permet — ingress, services et deployments séparés pour Node.js, Socket.io et PostgreSQL.
 
 ---
 
 ## 🗄️ Modèle Conceptuel de Données (MCD)
 
-5 entités principales :
+6 entités principales :
 
 ```
-UTILISATEUR ──(organise 1,1 / 0,N)──► BALADE
-UTILISATEUR ──(émet 1,N / 1,1)──────► LOCALISATION
-UTILISATEUR ──(participe 1,N)────────► PARTICIPATION ◄──(0,N contient)── BALADE
-UTILISATEUR ──(écrit 1,N / 1,1)──────► MESSAGE ◄──(appartient 1,N / 1,1)── BALADE
+UTILISATEUR ──(organise 1,1 / 0,N)──────► BALADE
+UTILISATEUR ──(émet 1,N / 1,1)──────────► LOCALISATION (visible + statut_rider)
+UTILISATEUR ──(participe 1,N / 0,N)──────► PARTICIPATION ◄──(contient 1,N / 0,N)── BALADE
+UTILISATEUR ──(écrit 1,N / 1,1)──────────► MESSAGE ◄──(appartient 1,N / 1,1)────── BALADE
+BALADE ──(compose 1,1 / 0,N)────────────► ETAPE
 ```
+
+Champs clés :
+- `BALADE.mode_inscription` — `automatique` ou `manuel`
+- `BALADE.horizon` — `maintenant`, `aujourd_hui`, `planifie`
+- `BALADE.statut` — `planifiee`, `imminente`, `en_cours`, `terminee`, `annulee`
+- `PARTICIPATION.statut` — `confirme`, `en_attente`, `annule`, `present`
+- `PARTICIPATION.ordre_attente` — position dans la liste d'attente
+- `LOCALISATION.statut_rider` — `disponible`, `en_balade`, `propose_sortie`
+- `ETAPE.ordre` — ordre des waypoints dans l'itinéraire
+
 ---
 
 ## 📊 Diagramme de cas d'utilisation
 
-Trois cas d'utilisation principaux :
+Deux acteurs : **Rider** et **Admin**
 
-1. **S'inscrire** — Créer un compte + profil moto + autoriser la géolocalisation
-2. **Se connecter** — Authentification JWT avec gestion du reset mot de passe
-3. **Carte interactive** — Voir les riders en temps réel, filtrer, contacter, mode invisible
+| Module | Cas d'utilisation |
+|---|---|
+| Authentification | S'inscrire, Se connecter, Réinitialiser mot de passe |
+| Profil | Gérer son profil |
+| Fil des sorties | Consulter le fil, Publier une sortie, Filtrer les sorties |
+| Balades | Créer une balade, S'inscrire à une balade, Gérer les demandes, Ajouter un itinéraire, Exporter vers GPS |
+| Chat | Envoyer un message, Recevoir notifications |
+| Administration | Modérer le contenu, Gérer les utilisateurs (Admin uniquement) |
+
+> L'Admin utilise le même cas "Se connecter" que le Rider — le rôle est différencié par le JWT (`role: admin`).
 
 ---
 
 ## 🖼️ Wireframes
 
-Trois écrans principaux maquettés :
+Quatre écrans principaux — palette Asphalt & Carbon (v5) :
 
 | Écran | Description |
 |---|---|
-| Carte live | Map avec pins riders, bottom sheet, badge LIVE |
-| Créer une balade | Formulaire + mini-carte + slots de places |
-| Profil rider | Stats, moto, tags style, historique balades |
+| Fil des sorties | Écran d'accueil — sorties triées par horizon, bouton "Publier une sortie" |
+| Détail balade | Infos organisateur, itinéraire, slots riders, export GPS |
+| Chat de sortie | Fil de discussion lié à la balade, messages système automatiques |
+| Gestion des demandes | Vue organisateur — accepter/refuser, liste d'attente ordonnée |
 
 ---
 
@@ -128,12 +156,33 @@ Trois écrans principaux maquettés :
 
 | Élément | Valeur |
 |---|---|
-| Couleur principale | `#1C1C1C` — Bitume |
-| Couleur accent | `#C0392B` — Moto Red |
-| Couleur secondaire | `#F5A623` — Ambre |
+| Fond principal | `#141414` — Asphalt |
+| Surface | `#1E1E1E` — Carbon |
+| Accent | `#D93025` — Moto Red |
+| Texte | `#F5F3F0` — Chalk |
+| Texte secondaire | `#888580` — Muted |
 | Typographie titres | Syne Bold |
 | Typographie corps | DM Sans Regular |
-| Style | Dark, sobre, inspiré Strava |
+| Style | Dark, sportif, inspiré Ducati × Strava |
+
+---
+
+## 📁 Structure du dépôt
+
+```
+motoconnect/
+├── docs/
+│   ├── mcd/
+│   │   └── mcd_motoconnect_v2.xml
+│   ├── uml/
+│   │   └── uml_motoconnect_v2.html
+│   ├── wireframes/
+│   │   ├── wireframes_motoconnect_v2.html
+│   │   └── wireframes_motoconnect_v5.html
+│   └── presentation/
+│       └── presentation.pdf
+└── README.md
+```
 
 ---
 
@@ -142,3 +191,4 @@ Trois écrans principaux maquettés :
 A définir
 
 ---
+
