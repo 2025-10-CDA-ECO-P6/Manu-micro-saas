@@ -1,12 +1,11 @@
-# 🏍️ MotoConnect
-
+# 🏍️ Kruse
 > **Trouve · Roule · Connecte** — L'app qui connecte les motards autour d'une passion commune.
 
 ---
 
 ## 📋 Présentation du projet
 
-MotoConnect est une application web et mobile qui permet aux motards de trouver des compagnons de route au bon moment — maintenant, dans quelques heures, ou dans quelques jours — en publiant une sortie visible par les riders proches.
+Kruse est une application web et mobile qui permet aux motards de trouver des compagnons de route au bon moment — maintenant, dans quelques heures, ou dans quelques jours — en publiant une sortie visible par les riders proches.
 
 Projet fil rouge — Licence Concepteur Développeur d'Application (CDA) 2025/2026.
 
@@ -170,18 +169,6 @@ Quatre écrans principaux — palette Asphalt & Carbon (v5) :
 ## 📁 Structure du dépôt
 
 ```
-motoconnect/
-├── docs/
-│   ├── mcd/
-│   │   └── mcd_motoconnect_v2.xml
-│   ├── uml/
-│   │   └── uml_motoconnect_v2.html
-│   ├── wireframes/
-│   │   ├── wireframes_motoconnect_v2.html
-│   │   └── wireframes_motoconnect_v5.html
-│   └── presentation/
-│       └── presentation.pdf
-└── README.md
 ```
 
 ---
